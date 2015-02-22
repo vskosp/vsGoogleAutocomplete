@@ -1,5 +1,5 @@
 angular.module('vsGoogleAutocomplete', [])
-	.directive('vsGoogleAutocomplete', function() {
+	.directive('vsGoogleAutocomplete', function($timeout) {
         return {
             restrict: 'A',
             require: 'ngModel',
@@ -25,9 +25,11 @@ angular.module('vsGoogleAutocomplete', [])
                 });
 				
 				element.on('focusout', function(event) {
-                    scope.$apply(function() {
-						NgModelController.$setViewValue(viewValue);
-                        NgModelController.$render();
+                    $timeout(function() {
+  					    scope.$apply(function() {
+					    	NgModelController.$setViewValue(viewValue);
+                            NgModelController.$render();
+					    });
 					});
                 });
             } 
