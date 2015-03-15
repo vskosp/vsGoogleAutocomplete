@@ -1,0 +1,1 @@
+var vsGoogleAutocomplete = angular.module('vsGoogleAutocomplete', []);

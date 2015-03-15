@@ -1,0 +1,11 @@
+{
+  "name": "vsGoogleAutocomplete",
+  "version": "0.2.0",
+  "description": "",
+  "main": "vsGoogleAutocomplete.js",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-uglify": "^0.8.0"
+  }
+}
