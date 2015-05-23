@@ -1,52 +1,84 @@
-module.exports = function(grunt) {
-
-    // Задачи
+п»їmodule.exports = function(grunt) {
     grunt.initConfig({
-	    options: {
-            separator: ';'
+	    
+		pkg: grunt.file.readJSON('package.json'),
+		
+		files: {
+		    // '<%= files.autocomplete %>'
+            autocomplete: [
+			    'src/vs-google-autocomplete.js'
+			],
+			// '<%= files.validator %>'
+			validator: [
+			    'src/vs-autocomplete-validator.js'
+			]
         },
-        // Склеиваем
-        concat: {			
-			vsGoogleAutocomplete: {
-			    src: [
-				    'src/vsModule.js',
-					'src/vsGooglePlaceUtility.js',
-					'src/vsGoogleAutocompleteDirective.js'
-				],
+		
+		jshint: {
+		    // jshint:autocomplete
+			autocomplete: [
+			    '<%= files.autocomplete %>'
+			],
+			// jshint:validator
+			validator: [
+				'<%= files.validator %>'
+			]
+        },
+		
+		concat: {
+		    // concat:autocomplete
+	    	autocomplete: {
+                src: ['src/js.prefix', '<%= files.autocomplete %>', 'src/js.suffix'],
                 dest: 'dist/vs-google-autocomplete.js'
-			},
-			vsValidator: {
-			    src: [
-				    'src/validator/vsValidatorsInjector.js',
-					'src/validator/vsValidator.js',
-					'src/validator/vsGoogleValidatorDirective.js',
-					'src/validator/validators/vsGooglePlaceValidator.js',
-					'src/validator/validators/vsStreetAddressValidator.js'
-				],
-                dest: 'dist/vs-google-validator.js'
-			}
-        },
-        // Сжимаем
-        uglify: {
-            vsGoogleAutocomplete: {
+            },
+			// concat:validator
+			validator: {
+                src: ['src/js.prefix', '<%= files.validator %>', 'src/js.suffix'],
+                dest: 'dist/vs-autocomplete-validator.js'
+            }
+		},
+		
+		uglify: {
+		    // uglify:autocomplete
+            autocomplete: {
                 files: {
-                    'dist/vs-google-autocomplete.min.js': '<%= concat.vsGoogleAutocomplete.dest %>'
+                    'dist/vs-google-autocomplete.min.js': ['<%= concat.autocomplete.dest %>']
                 }
             },
-			vsValidator: {
+			// uglify:validator
+            validator: {
                 files: {
-					'dist/vs-google-validator.min.js': '<%= concat.vsValidator.dest %>'
+                    'dist/vs-autocomplete-validator.min.js': ['<%= concat.validator.dest %>']
+                }
+            }
+        },
+				
+		watch: {
+		    // watch:src
+            src: {
+                files: ['<%= files.autocomplete %>', '<%= files.validator %>'],
+                tasks: ['jshint'],
+                options: {
+                    interrupt: true
                 }
             }
         }
-    });
-
-    // Загрузка плагинов, установленных с помощью npm install
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-
-    // Задача по умолчанию
-	grunt.registerTask('build-directive', ['concat:vsGoogleAutocomplete', 'uglify:vsGoogleAutocomplete']);
-	grunt.registerTask('build-validator', ['concat:vsValidator', 'uglify:vsValidator']);
-	grunt.registerTask('build', ['concat', 'uglify']);
+	});
+	
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+		
+	// build autocomplete
+	grunt.registerTask('build-autocomplete', ['jshint:autocomplete', 'concat:autocomplete', 'uglify:autocomplete']);
+	
+	// build validator
+	grunt.registerTask('build-validator', ['jshint:validator', 'concat:validator', 'uglify:validator']);
+	
+	// build
+	grunt.registerTask('build', ['build-autocomplete', 'build-validator']);
+	
+	// default
+	grunt.registerTask('default', ['build']);
 };
