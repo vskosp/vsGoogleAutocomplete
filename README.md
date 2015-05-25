@@ -174,3 +174,6 @@ angular.module('yourApp')
 After adding custom validator, you should add its name as attribute parameter to `vs-autocomplete-validator` directive. Validator whith name `someValidatorName` in factory should have name `some-validator-name` in html.
 
 Core developers can inject in validator factory `vsGooglePlaceUtility`service, which contains useful functionality for working with `PlaceResult` object (parameter of function for validation). You can look at this utility service in `vs-autocomplete-validator.js` :).
+
+## License
+[MIT](http://opensource.org/licenses/MIT) © K.Polishchuk
