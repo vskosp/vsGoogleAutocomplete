@@ -112,7 +112,14 @@ Module, as an addition, also provides special validator for autocomplete validat
 ```
 By default validator checks if autocomplete result is a valid google address (selected from drop down list).
 #### Additional validators
-You can add additional validators:
+You can add additional validator by adding denormalized validator name as attribute parameter. If you need more than one additional validator, you can add validator names using comma(`,`) separator.
+
+<b>Available validator names</b>
+- <b>`vsSreetAddress`</b> - normalized name of validator, which checks if autocomplete result is full address (street number, street, ...)
+
+This module is under development and now it has only one additional validator (and one by default). Please, if you need another additional validators, you can write about this in [issues](https://github.com/vskosp/vsGoogleAutocomplete/issues), we will be grateful to you :).
+
+<b>Example</b>
 ``` html
 <form>
   <input vs-google-autocomplete
@@ -123,6 +130,7 @@ You can add additional validators:
 </form>
 ```
 In the example above validator will checks if autocomplete result is a valid google address <b>and</b> if it is a full address (street number, street, ...).
+
 #### Custom validators
 Also you can add your own validator for your own needs. Embedded validator should validate [PlaceResult](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object, which returns after autocomplete. For this, you should add factory to your main module, which must return function.
 
