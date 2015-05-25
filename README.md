@@ -123,3 +123,30 @@ You can add additional validators:
 </form>
 ```
 In the example above validator will checks if autocomplete result is a valid google address <b>and</b> if it is a full address (street number, street, ...).
+#### Custom validators
+Also you can add your own validator for your own needs. Embedded validator should validate [PlaceResult](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object, which returns after autocomplete. For this, you should add factory to your main module, which must return function.
+
+<b>Custom validator template</b>:
+```javascript
+angular.module('yourApp')
+  .factory('validatorName', function() {
+    	/**
+      * Implementation of custom embedded validator.
+    	* @param {google.maps.places.PlaceResult} PlaceResult object.
+    	* @return {boolean} Valid status (true or false)
+      */
+    	function validate(place) {
+    		// ...
+    	}
+    	
+    	return validate;
+    });
+```
+<b>Rules for custom validator</b>:
+- you should add factory to any module of your app
+- factory must always return function (embedded validator implementation)
+- function for validation always gets [PlaceResult](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object as parameter
+- you should implement function, which returns
+- factory name - it is normalized embedded validator name (eg. 'validatorName' in factory can be 'validator-name' in html)
+
+Core developers can inject in validator factory `vsGooglePlaceUtility`service, which contains useful functionality for working with `PlaceResult` object (parameter of function for validation). You can look at this utility service in `vs-autocomplete-validator.js` :).
