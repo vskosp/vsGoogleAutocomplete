@@ -18,7 +18,7 @@ bower install vs-google-autocomplete
 ``` javascript
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 ```
-2) Add `vs-google-autocomplete.js to` your index.html
+2) Add `vs-google-autocomplete.js` to your index.html
 
 3) Add `vsGoogleAutocomplete` module dependency:
 ``` javascript
@@ -34,7 +34,9 @@ angular.module('yourApp', ['vsGoogleAutocomplete']);
 </form>
 ```
 ## Autocomplete options
-You can add an options object, which can contain the following properties:
+You can add an options object, which will restrict the results.
+
+Options object can contain the following properties:
 - types `{Array.<string>}` (In general only a single type is allowed): 
   - 'geocode'
   - 'address'
@@ -93,3 +95,31 @@ Example:
          type="text">
 </form>
 ```
+## Embedded validator
+Module, as an addition, also provides special validator for autocomplete validation.
+#### Simple usage
+1) Add `vs-autocomplete-validator.js` to your index.html
+
+2) Add `vs-autocomplete-validator` directive to input field:
+``` html
+<form>
+  <input vs-google-autocomplete
+         vs-autocomplete-validator
+         ng-model="address"
+         name="address"
+         type="text">
+</form>
+```
+By default validator checks if autocomplete result is a valid google address (selected from drop down list).
+#### Additional validators
+You can add additional validators:
+``` html
+<form>
+  <input vs-google-autocomplete
+         vs-autocomplete-validator="vs-street-address"
+         ng-model="address"
+         name="address"
+         type="text">
+</form>
+```
+In the example above validator will checks if autocomplete result is a valid google address <b>and</b> if it is a full address (street number, street, ...).
