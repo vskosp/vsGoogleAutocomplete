@@ -1,5 +1,5 @@
 # vsGoogleAutocomplete
-Easy autocomplete through the [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/places-autocomplete)
+Easy autocomplete through the [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/places-autocomplete) and embedded validator
 
 - [Demo](#demo)
 - [Features](#features)
