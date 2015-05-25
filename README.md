@@ -1,6 +1,19 @@
 # vsGoogleAutocomplete
 Easy autocomplete through the [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/places-autocomplete)
 
+- [Demo](#demo)
+- [Features](#features)
+- [Install](#install)
+- [Getting started](#getting-started)
+- [Autocomplete options](#autocomplete-options)
+- [Parsing address components](#parsing-address-components)
+- [Embedded validator](#embedded-validator)
+  - [Simple usage](#simple-usage)
+  - [Additional validators](#additional-validators)
+  - [Validation errors](#validation-errors)
+  - [Custom validators](#custom-validators)
+- [License](#license)
+
 ## Demo
 - [Demo](http://plnkr.co/edit/sdcIaQ?p=preview)
 - [Demo with validator](http://plnkr.co/edit/u91e8N?p=preview)
@@ -17,7 +30,7 @@ Easy autocomplete through the [Google Maps JavaScript API v3](https://developers
 bower install vs-google-autocomplete
 ```
 
-## Simple usage
+## Getting started
 1) Add the Google Places library script to your index.html
 ``` javascript
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
