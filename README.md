@@ -1,5 +1,9 @@
 # vsGoogleAutocomplete
-Easy autocomplete through the Google Maps JavaScript API v3
+Easy autocomplete through the [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/places-autocomplete)
+
+## Demo
+- [Demo](http://plnkr.co/edit/sdcIaQ?p=preview)
+- [Demo with validator](http://plnkr.co/edit/u91e8N?p=preview)
 
 ## Features
 - Has special <b>embedded validator</b> for autocomplete validation
@@ -33,10 +37,11 @@ angular.module('yourApp', ['vsGoogleAutocomplete']);
          type="text">
 </form>
 ```
+
 ## Autocomplete options
 You can add an options object, which will restrict the results.
 
-Options object can contain the following properties:
+<b>Options object</b> can contain the following properties:
 - types `{Array.<string>}` (In general only a single type is allowed): 
   - 'geocode'
   - 'address'
@@ -48,7 +53,7 @@ Options object can contain the following properties:
 
 For more information look Google Maps JavaScript API [docs](https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete).
 
-Example:
+<b>Example</b>:
 ``` html
 <form>
   <input vs-google-autocomplete="options"
@@ -59,14 +64,15 @@ Example:
 ```
 ```javascript
 $scope.options = {
-    types: ['(cities)'],
-    componentRestrictions: { country: 'FR' }
-  }
+  types: ['(cities)'],
+  componentRestrictions: { country: 'FR' }
+}
 ```
+
 ## Parsing address components
 You can bind your model with autocomlete address components. 
 
-Directives for parsing:
+<b>Directives for parsing</b>:
 - <b>`vs-place`</b> - gets [place detail results](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object
 - <b>`vs-place-id`</b> - gets unique identifier denoting place
 - <b>`vs-street-number`</b> - gets street number of place
@@ -76,7 +82,7 @@ Directives for parsing:
 - <b>`vs-country-short`</b> - gets country iso code of place
 - <b>`vs-country`</b> - gets country name of place
 
-Example:
+<b>Example</b>:
 ``` html
 <form>
   <input vs-google-autocomplete="options"
@@ -95,9 +101,11 @@ Example:
          type="text">
 </form>
 ```
+
 ## Embedded validator
 Module, as an addition, also provides special validator for autocomplete validation.
-#### Simple usage
+
+### Simple usage
 1) Add `vs-autocomplete-validator.js` to your index.html
 
 2) Add `vs-autocomplete-validator` directive to input field:
@@ -111,7 +119,8 @@ Module, as an addition, also provides special validator for autocomplete validat
 </form>
 ```
 By default validator checks if autocomplete result is a valid google address (selected from drop down list).
-#### Additional validators
+
+### Additional validators
 You can add additional validator by adding denormalized validator name as attribute parameter. If you need more than one additional validator, you can add validator names using comma(`,`) separator.
 
 <b>Available validator names</b>
@@ -130,11 +139,13 @@ This module is under development and now it has only one additional validator (a
 </form>
 ```
 In the example above validator will checks if autocomplete result is a valid google address <b>and</b> if it is a full address (street number, street, ...).
-#### Validation errors
+
+### Validation errors
 Validator publishes validation errors if validation is failed.
 
-If validation is failed, validator publish to `NgModelController.$error` error with name `vsAutocompleteValidator` <b>and</b> names of each embedded validator to `NgModelController.vsAutocompleteErorr` hash object.
-#### Custom validators
+If validation is failed, validator publish error with name `vsAutocompleteValidator` to `NgModelController.$error` hash object <b>and</b> name of each embedded validator to `NgModelController.vsAutocompleteErorr` hash object.
+
+### Custom validators
 Also you can add your own validator for your own needs. Embedded validator should validate [PlaceResult](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object, which returns after autocomplete. For this, you should add factory to your main module, which must return function.
 
 <b>Custom validator template</b>:
