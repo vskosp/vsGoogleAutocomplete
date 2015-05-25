@@ -165,17 +165,17 @@ Also you can add your own validator for your own needs. Embedded validator shoul
 ```javascript
 angular.module('yourApp')
   .factory('validatorName', function() {
-    	/**
-      * Implementation of custom embedded validator.
-    	* @param {google.maps.places.PlaceResult} PlaceResult object.
-    	* @return {boolean} Valid status (true or false)
-      */
-    	function validate(place) {
-    		// ...
-    	}
+    /**
+    * Implementation of custom embedded validator.
+    * @param {google.maps.places.PlaceResult} PlaceResult object.
+    * @return {boolean} Valid status (true or false)
+    */
+    function validate(place) {
+    	// ...
+    }
     	
-    	return validate;
-    });
+    return validate;
+  });
 ```
 <b>Rules for custom validator</b>:
 - you should add factory to any module of your app
