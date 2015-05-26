@@ -12,7 +12,9 @@ Angularjs autocomplete module using [Google Maps JavaScript API v3](https://deve
   - [Additional validators](#additional-validators)
   - [Validation errors](#validation-errors)
   - [Custom validators](#custom-validators)
+- [Author](#author)
 - [License](#license)
+- [Credits](#credits)
 
 ## Demo
 - [Demo](http://plnkr.co/edit/sdcIaQ?p=preview)
@@ -54,7 +56,7 @@ angular.module('yourApp', ['vsGoogleAutocomplete']);
 ## Autocomplete options
 You can add an options object as attribute parameter, which will restrict autocomplete results.
 
-<b>Options object</b> can contain the following properties:
+[<b>Options object</b>](https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete) can contain the following properties:
 - types `{Array.<string>}` (In general only a single type is allowed): 
   - 'geocode'
   - 'address'
@@ -63,8 +65,6 @@ You can add an options object as attribute parameter, which will restrict autoco
   - '(cities)'
 - bounds `{google.maps.LatLngBounds}`
 - componentRestrictions `{object}`
-
-For more information look Google Maps JavaScript API [docs](https://developers.google.com/maps/documentation/javascript/places-autocomplete#add_autocomplete).
 
 <b>Example</b>:
 ``` html
@@ -190,5 +190,11 @@ After adding custom validator, you should add its name as attribute parameter to
 
 Core developers can inject in validator factory `vsGooglePlaceUtility`service, which contains useful functionality for working with `PlaceResult` object (parameter of function for validation). You can look at this utility service in `vs-autocomplete-validator.js` :).
 
+## Author
+**K.Polishchuk** (http://github.com/vskosp)
+
 ## License
 [MIT](http://opensource.org/licenses/MIT) © K.Polishchuk
+
+## Credits
+Google Maps JavaScript API https://developers.google.com/maps/documentation/javascript/places-autocomplete
