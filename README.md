@@ -1,5 +1,5 @@
 # vsGoogleAutocomplete
-Easy autocomplete through the [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/places-autocomplete) and embedded validator
+Angularjs autocomplete module using [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/places-autocomplete) and embedded autocomplete validator
 
 - [Demo](#demo)
 - [Features](#features)
@@ -8,7 +8,7 @@ Easy autocomplete through the [Google Maps JavaScript API v3](https://developers
 - [Autocomplete options](#autocomplete-options)
 - [Parsing address components](#parsing-address-components)
 - [Embedded validator](#embedded-validator)
-  - [Simple usage](#simple-usage)
+  - [Default usage](#default-usage)
   - [Additional validators](#additional-validators)
   - [Validation errors](#validation-errors)
   - [Custom validators](#custom-validators)
@@ -52,7 +52,7 @@ angular.module('yourApp', ['vsGoogleAutocomplete']);
 ```
 
 ## Autocomplete options
-You can add an options object, which will restrict the results.
+You can add an options object as attribute parameter, which will restrict autocomplete results.
 
 <b>Options object</b> can contain the following properties:
 - types `{Array.<string>}` (In general only a single type is allowed): 
@@ -83,7 +83,7 @@ $scope.options = {
 ```
 
 ## Parsing address components
-You can bind your model with autocomlete address components. 
+You can bind your model with autocomplete address components. 
 
 <b>Directives for parsing</b>:
 - <b>`vs-place`</b> - gets [place detail results](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object
@@ -118,7 +118,7 @@ You can bind your model with autocomlete address components.
 ## Embedded validator
 Module, as an addition, also provides special validator for autocomplete validation.
 
-### Simple usage
+### Default usage
 1) Add `vs-autocomplete-validator.js` to your index.html
 
 2) Add `vs-autocomplete-validator` directive to input field:
@@ -131,15 +131,17 @@ Module, as an addition, also provides special validator for autocomplete validat
          type="text">
 </form>
 ```
-By default validator checks if autocomplete result is a valid google address (selected from drop down list).
+By default, validator checks if autocomplete result is a valid google address (selected from drop down list).
 
 ### Additional validators
 You can add additional validator by adding denormalized validator name as attribute parameter. If you need more than one additional validator, you can add validator names using comma(`,`) separator.
 
+Validator names in html are normalized in javascript code, so validator with name `vsSreetAddress` should have name `vs-street-address` in html.
+
 <b>Available validator names</b>
 - <b>`vsSreetAddress`</b> - normalized name of validator, which checks if autocomplete result is full address (street number, street, ...)
 
-This module is under development and now it has only one additional validator (and one by default). Please, if you need another additional validators, you can write about this in [issues](https://github.com/vskosp/vsGoogleAutocomplete/issues), we will be grateful to you :).
+This module is under development and now it has only one additional validator (and one by default). Please, if you need other additional validators, you can write about this in [issues](https://github.com/vskosp/vsGoogleAutocomplete/issues), we will be grateful to you :).
 
 <b>Example</b>
 ``` html
@@ -159,7 +161,7 @@ Validator publishes validation errors if validation is failed.
 If validation is failed, validator publish error with name `vsAutocompleteValidator` to `NgModelController.$error` hash object <b>and</b> name of each embedded validator to `NgModelController.vsAutocompleteErorr` hash object.
 
 ### Custom validators
-Also you can add your own validator for your own needs. Embedded validator should validate [PlaceResult](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object, which returns after autocomplete. For this, you should add factory to your main module, which must return function.
+You can also add your own validator for your own needs. Embedded validator should validate [PlaceResult](https://developers.google.com/maps/documentation/javascript/places#place_details_results) object, which returns after autocomplete. For this, you should add factory to your main module, which must return function.
 
 <b>Custom validator template</b>:
 ```javascript
@@ -184,7 +186,7 @@ angular.module('yourApp')
 - you should implement function, which returns
 - factory name - it is normalized embedded validator name (eg. 'validatorName' in factory can be 'validator-name' in html)
 
-After adding custom validator, you should add its name as attribute parameter to `vs-autocomplete-validator` directive. Validator whith name `someValidatorName` in factory should have name `some-validator-name` in html.
+After adding custom validator, you should add its name as attribute parameter to `vs-autocomplete-validator` directive. Validator with name `someValidatorName` in factory should have name `some-validator-name` in html.
 
 Core developers can inject in validator factory `vsGooglePlaceUtility`service, which contains useful functionality for working with `PlaceResult` object (parameter of function for validation). You can look at this utility service in `vs-autocomplete-validator.js` :).
 
