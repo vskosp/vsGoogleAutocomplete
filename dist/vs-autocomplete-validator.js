@@ -1,3 +1,9 @@
+/**
+ * vsGoogleAutocomplete - v0.2.0 - 2015-05-27
+ * https://github.com/vskosp/vsGoogleAutocomplete
+ * Copyright (c) 2015 K.Polishchuk
+ * License: MIT
+ */
 (function (window, document) {
 'use strict';
 angular.module('vsGoogleAutocomplete').factory('vsEmbeddedValidatorsInjector', ['$injector', function($injector) {

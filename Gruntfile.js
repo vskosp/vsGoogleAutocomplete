@@ -3,6 +3,14 @@
 	    
 		pkg: grunt.file.readJSON('package.json'),
 		
+		meta: {
+            banner: '/**\n * <%= pkg.name %> - v<%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            ' * <%= pkg.homepage %>\n' +
+            ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+            ' * License: <%= pkg.license %>\n */\n'
+        },
+		
 		files: {
 		    // '<%= files.autocomplete %>'
             autocomplete: [
@@ -28,11 +36,17 @@
 		concat: {
 		    // concat:autocomplete
 	    	autocomplete: {
+			    options: {
+                    banner: '<%= meta.banner %>'
+                },
                 src: ['src/js.prefix', '<%= files.autocomplete %>', 'src/js.suffix'],
                 dest: 'dist/vs-google-autocomplete.js'
             },
 			// concat:validator
 			validator: {
+			    options: {
+                    banner: '<%= meta.banner %>'
+                },
                 src: ['src/js.prefix', '<%= files.validator %>', 'src/js.suffix'],
                 dest: 'dist/vs-autocomplete-validator.js'
             }
