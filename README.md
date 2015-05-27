@@ -81,6 +81,7 @@ $scope.options = {
   componentRestrictions: { country: 'FR' }
 }
 ```
+In example above, autocomplete results will only consist of cities of France.
 
 ## Parsing address components
 You can bind your model with autocomplete address components. 
