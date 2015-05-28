@@ -95,6 +95,8 @@ You can bind your model with autocomplete address components.
 - <b>`vs-state`</b> - gets state name of place
 - <b>`vs-country-short`</b> - gets country iso code of place
 - <b>`vs-country`</b> - gets country name of place
+- <b>`vs-latitude`</b> - gets latitude of place
+- <b>`vs-longitude`</b> - gets longitude of place
 
 <b>Example</b>:
 ``` html
