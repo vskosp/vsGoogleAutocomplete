@@ -82,6 +82,20 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
     	return country;
     }
 	
+	function isGeometryExist(place) {
+        return angular.isObject(place) && angular.isObject(place.geometry);
+    }
+     
+    function getLatitude(place) {
+        if (!isGeometryExist(place)) return;
+        return place.geometry.location.A;
+    }
+      
+    function getLongitude(place) {
+        if (!isGeometryExist(place)) return;
+        return place.geometry.location.F;
+    }
+	
 	return {
 	    isGooglePlace: isGooglePlace,
         isContainTypes: isContainTypes,
@@ -91,7 +105,9 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
         getCity: getCity,
         getState: getState,
         getCountryShort: getCountryShort,
-        getCountry: getCountry
+        getCountry: getCountry,
+        getLatitude: getLatitude,
+        getLongitude: getLongitude
 	};
 });
 
@@ -108,7 +124,9 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			vsCity: '=?',
 			vsState: '=?',
 			vsCountryShort: '=?',
-			vsCountry: '=?'
+			vsCountry: '=?',
+   			vsLatitude: '=?',
+   			vsLongitude: '=?'
         },
 		controller: ['$scope', '$attrs', function($scope, $attrs) {
 			this.isolatedScope = $scope;
@@ -125,6 +143,8 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsState        = !!$attrs.vsState && place        ? vsGooglePlaceUtility.getState(place)        : undefined;
 				$scope.vsCountryShort = !!$attrs.vsCountryShort && place ? vsGooglePlaceUtility.getCountryShort(place) : undefined;
 				$scope.vsCountry      = !!$attrs.vsCountry && place      ? vsGooglePlaceUtility.getCountry(place)      : undefined;
+				$scope.vsLatitude     = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
+    			$scope.vsLongitude    = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
 			};
 		}],
         link: function(scope, element, attrs, ctrls) {
