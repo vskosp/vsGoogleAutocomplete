@@ -111,7 +111,7 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
 	};
 });
 
-angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGooglePlaceUtility', function(vsGooglePlaceUtility) {
+angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGooglePlaceUtility', '$timeout', function(vsGooglePlaceUtility, $timeout) {
     return {
         restrict: 'A',
         require: ['vsGoogleAutocomplete', 'ngModel'],
@@ -175,11 +175,13 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
             });
 			
 			// updates view value on focusout
-			element.on('focusout', function(event) {
+			element.on('blur', function(event) {
                 viewValue = (place && place.formatted_address) ? viewValue : modelCtrl.$viewValue;
-				scope.$apply(function() {
-					modelCtrl.$setViewValue(viewValue);
-                    modelCtrl.$render();
+				$timeout(function() {
+				    scope.$apply(function() {
+				    	modelCtrl.$setViewValue(viewValue);
+                        modelCtrl.$render();
+				    });
 				});
             });
 			
