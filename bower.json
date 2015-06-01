@@ -1,6 +1,6 @@
 {
   "name": "vsGoogleAutocomplete",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/vskosp/vsGoogleAutocomplete",
   "authors": [
     "K.Polishchuk"
@@ -40,6 +40,7 @@
     "package.json",
     "Gruntfile.js",
     "karma.conf.js",
+	"CHANGELOG.md",
 	"src",
     "test",
     "tests"
