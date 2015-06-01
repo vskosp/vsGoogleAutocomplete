@@ -1,5 +1,5 @@
 /**
- * vsGoogleAutocomplete - v0.3.0 - 2015-05-28
+ * vsGoogleAutocomplete - v0.3.1 - 2015-05-29
  * https://github.com/vskosp/vsGoogleAutocomplete
  * Copyright (c) 2015 K.Polishchuk
  * License: MIT
