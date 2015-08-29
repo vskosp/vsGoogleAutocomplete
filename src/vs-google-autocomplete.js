@@ -6,11 +6,11 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
     		return false;
     	return !!place.place_id;
     }
- 
+
     function isContainTypes(place, types) {
         var placeTypes,
     	    placeType,
-    	    type;	
+    	    type;
     	if (!isGooglePlace(place))
     	    return false;
     	placeTypes = place.types;
@@ -25,7 +25,7 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
     	}
     	return false;
     }
-	
+
 	function getAddrComponent(place, componentTemplate) {
         var result;
     	if (!isGooglePlace(place))
@@ -39,63 +39,63 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
         }
     	return;
     }
-	
+
 	function getPlaceId(place) {
         if (!isGooglePlace(place))
     	    return;
     	return place.place_id;
     }
-	
+
     function getStreetNumber(place) {
         var COMPONENT_TEMPLATE = { street_number: 'short_name' },
     	    streetNumber = getAddrComponent(place, COMPONENT_TEMPLATE);
 		return streetNumber;
     }
-	
+
     function getStreet(place) {
         var COMPONENT_TEMPLATE = { route: 'long_name' },
     	    street = getAddrComponent(place, COMPONENT_TEMPLATE);
 		return street;
     }
-	
+
     function getCity(place) {
         var COMPONENT_TEMPLATE = { locality: 'long_name' },
     	    city = getAddrComponent(place, COMPONENT_TEMPLATE);
 		return city;
     }
-	
+
     function getState(place) {
         var COMPONENT_TEMPLATE = { administrative_area_level_1: 'short_name' },
     	    state = getAddrComponent(place, COMPONENT_TEMPLATE);
     	return state;
     }
-	
+
     function getCountryShort(place) {
         var COMPONENT_TEMPLATE = { country: 'short_name' },
     	    countryShort = getAddrComponent(place, COMPONENT_TEMPLATE);
     	return countryShort;
     }
-	
+
     function getCountry(place) {
         var COMPONENT_TEMPLATE = { country: 'long_name' },
     	    country = getAddrComponent(place, COMPONENT_TEMPLATE);
     	return country;
     }
-	
+
 	function isGeometryExist(place) {
         return angular.isObject(place) && angular.isObject(place.geometry);
     }
-     
+
     function getLatitude(place) {
         if (!isGeometryExist(place)) return;
-        return place.geometry.location.A;
+        return place.geometry.location.lat();
     }
-      
+
     function getLongitude(place) {
         if (!isGeometryExist(place)) return;
-        return place.geometry.location.F;
+        return place.geometry.location.lng();
     }
-	
+
 	return {
 	    isGooglePlace: isGooglePlace,
         isContainTypes: isContainTypes,
@@ -130,7 +130,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
         },
 		controller: ['$scope', '$attrs', function($scope, $attrs) {
 			this.isolatedScope = $scope;
-			
+
 			/**
             * Updates address components associated with scope model.
             * @param {google.maps.places.PlaceResult} place PlaceResult object
@@ -139,7 +139,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			    $scope.vsPlaceId      = !!$attrs.vsPlaceId  && place     ? vsGooglePlaceUtility.getPlaceId(place)      : undefined;
 				$scope.vsStreetNumber = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
 				$scope.vsStreet       = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
-				$scope.vsCity         = !!$attrs.vsCity && place         ? vsGooglePlaceUtility.getCity(place)         : undefined;		
+				$scope.vsCity         = !!$attrs.vsCity && place         ? vsGooglePlaceUtility.getCity(place)         : undefined;
 				$scope.vsState        = !!$attrs.vsState && place        ? vsGooglePlaceUtility.getState(place)        : undefined;
 				$scope.vsCountryShort = !!$attrs.vsCountryShort && place ? vsGooglePlaceUtility.getCountryShort(place) : undefined;
 				$scope.vsCountry      = !!$attrs.vsCountry && place      ? vsGooglePlaceUtility.getCountry(place)      : undefined;
@@ -151,17 +151,17 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			// controllers
 			var autocompleteCtrl = ctrls[0],
 			    modelCtrl = ctrls[1];
-			
+
 			// google.maps.places.Autocomplete instance (support google.maps.places.AutocompleteOptions)
 			var autocompleteOptions = scope.vsGoogleAutocomplete || {},
 			    autocomplete = new google.maps.places.Autocomplete(element[0], autocompleteOptions);
-			
+
 			// google place object
 			var place;
-			
+
 			// value for updating view
 			var	viewValue;
-				
+
 			// updates view value and address components on place_changed google api event
 			google.maps.event.addListener(autocomplete, 'place_changed', function() {
 				place = autocomplete.getPlace();
@@ -170,10 +170,10 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				    scope.vsPlace = place;
 					autocompleteCtrl.updatePlaceComponents(place);
 					modelCtrl.$setViewValue(viewValue);
-                    modelCtrl.$render();					    
+                    modelCtrl.$render();
 				});
             });
-			
+
 			// updates view value on focusout
 			element.on('blur', function(event) {
                 viewValue = (place && place.formatted_address) ? viewValue : modelCtrl.$viewValue;
@@ -184,13 +184,13 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				    });
 				});
             });
-			
+
 			// prevent submitting form on enter
-			google.maps.event.addDomListener(element[0], 'keydown', function(e) { 
-                if (e.keyCode == 13) { 
-                    e.preventDefault(); 
+			google.maps.event.addDomListener(element[0], 'keydown', function(e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
                 }
             });
-        } 
+        }
     };
 }]);
