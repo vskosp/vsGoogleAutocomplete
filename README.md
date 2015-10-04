@@ -140,10 +140,10 @@ By default, validator checks if autocomplete result is a valid google address (s
 ### Additional validators
 You can add additional validator by adding denormalized validator name as attribute parameter. If you need more than one additional validator, you can add validator names using comma(`,`) separator.
 
-Validator names in html are normalized in javascript code, so validator with name `vsSreetAddress` should have name `vs-street-address` in html.
+Validator names in html are normalized in javascript code, so validator with name `vsStreetAddress` should have name `vs-street-address` in html.
 
 <b>Available validator names</b>
-- <b>`vsSreetAddress`</b> - normalized name of validator, which checks if autocomplete result is full address (street number, street, ...)
+- <b>`vsStreetAddress`</b> - normalized name of validator, which checks if autocomplete result is full address (street number, street, ...)
 
 This module is under development and now it has only one additional validator (and one by default). Please, if you need other additional validators, you can write about this in [issues](https://github.com/vskosp/vsGoogleAutocomplete/issues), we will be grateful to you :).
 
