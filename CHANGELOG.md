@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.0 - 2015-10-04
+- [pull #6](https://github.com/vskosp/vsGoogleAutocomplete/pull/6) Added `vsPostCode` for parsing postcode. [close #2](https://github.com/vskosp/vsGoogleAutocomplete/issues/2)
+
 ## 0.3.1 - 2015-06-01
 - Fixed bug in updating of input value in Firefox.
 
