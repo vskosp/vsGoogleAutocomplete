@@ -81,6 +81,11 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
     	    country = getAddrComponent(place, COMPONENT_TEMPLATE);
     	return country;
     }
+    function getPostCode(place) {
+        var COMPONENT_TEMPLATE = { postal_code: 'long_name' },
+            postCode = getAddrComponent(place, COMPONENT_TEMPLATE);
+        return postCode;
+    }
 
 	function isGeometryExist(place) {
         return angular.isObject(place) && angular.isObject(place.geometry);
@@ -107,7 +112,8 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
         getCountryShort: getCountryShort,
         getCountry: getCountry,
         getLatitude: getLatitude,
-        getLongitude: getLongitude
+        getLongitude: getLongitude,
+        getPostCode: getPostCode
 	};
 });
 
@@ -125,6 +131,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			vsState: '=?',
 			vsCountryShort: '=?',
 			vsCountry: '=?',
+            vsPostCode: '=?',
    			vsLatitude: '=?',
    			vsLongitude: '=?'
         },
@@ -140,7 +147,8 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsStreetNumber = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
 				$scope.vsStreet       = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
 				$scope.vsCity         = !!$attrs.vsCity && place         ? vsGooglePlaceUtility.getCity(place)         : undefined;
-				$scope.vsState        = !!$attrs.vsState && place        ? vsGooglePlaceUtility.getState(place)        : undefined;
+				$scope.vsPostCode     = !!$attrs.vsPostCode && place ? vsGooglePlaceUtility.getPostCode(place)         : undefined;
+                $scope.vsState        = !!$attrs.vsState && place        ? vsGooglePlaceUtility.getState(place)        : undefined;
 				$scope.vsCountryShort = !!$attrs.vsCountryShort && place ? vsGooglePlaceUtility.getCountryShort(place) : undefined;
 				$scope.vsCountry      = !!$attrs.vsCountry && place      ? vsGooglePlaceUtility.getCountry(place)      : undefined;
 				$scope.vsLatitude     = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
