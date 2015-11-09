@@ -92,15 +92,20 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
     }
 
     function getLatitude(place) {
-        if (!isGeometryExist(place)) return;
-        return place.geometry.location.lat();
+        if (!isGeometryExist(place)) {
+            return;
+        } else {
+            return place.geometry.location.lat();
+        }
     }
 
     function getLongitude(place) {
-        if (!isGeometryExist(place)) return;
-        return place.geometry.location.lng();
+        if (!isGeometryExist(place)){
+            return;
+        } else {
+            return place.geometry.location.lng();
+        }
     }
-
 	return {
 	    isGooglePlace: isGooglePlace,
         isContainTypes: isContainTypes,
