@@ -98,6 +98,7 @@ You can bind your model with autocomplete address components.
 - <b>`vs-latitude`</b> - gets latitude of place
 - <b>`vs-longitude`</b> - gets longitude of place
 - <b>`vs-post-code`</b> - gets postcode of place
+- <b>`vs-county`</b> - gets county of place (administrative_area_level_2)
 
 <b>Example</b>:
 ``` html
@@ -113,6 +114,7 @@ You can bind your model with autocomplete address components.
          vs-state="address.components.state"
          vs-country-short="address.components.countryCode"
          vs-country="address.components.country"
+	     vs-county = "address.components.county"
          
          name="address"
          type="text">
