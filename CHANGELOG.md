@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.0 - 2015-11-29
+- [pull #13](https://github.com/vskosp/vsGoogleAutocomplete/pull/13) Added `vsDistrict` for parsing district.
+
 ## 0.4.0 - 2015-10-04
 - [pull #6](https://github.com/vskosp/vsGoogleAutocomplete/pull/6) Added `vsPostCode` for parsing postcode. [close #2](https://github.com/vskosp/vsGoogleAutocomplete/issues/2)
 
