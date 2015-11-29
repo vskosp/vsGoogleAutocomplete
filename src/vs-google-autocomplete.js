@@ -69,6 +69,12 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
     	    state = getAddrComponent(place, COMPONENT_TEMPLATE);
     	return state;
     }
+    
+    function getDistrict(place) {
+        var COMPONENT_TEMPLATE = { administrative_area_level_2: 'short_name' },
+    	    state = getAddrComponent(place, COMPONENT_TEMPLATE);
+    	return state;
+    }
 
     function getCountryShort(place) {
         var COMPONENT_TEMPLATE = { country: 'short_name' },
@@ -113,7 +119,8 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
         getCountry: getCountry,
         getLatitude: getLatitude,
         getLongitude: getLongitude,
-        getPostCode: getPostCode
+        getPostCode: getPostCode,
+        getDistrict: getDistrict
 	};
 });
 
@@ -133,7 +140,8 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			vsCountry: '=?',
             vsPostCode: '=?',
    			vsLatitude: '=?',
-   			vsLongitude: '=?'
+   			vsLongitude: '=?',
+            vsDistrict: '=?'
         },
 		controller: ['$scope', '$attrs', function($scope, $attrs) {
 			this.isolatedScope = $scope;
@@ -143,16 +151,17 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
             * @param {google.maps.places.PlaceResult} place PlaceResult object
             */
 			this.updatePlaceComponents = function(place) {
-			    $scope.vsPlaceId      = !!$attrs.vsPlaceId  && place     ? vsGooglePlaceUtility.getPlaceId(place)      : undefined;
-				$scope.vsStreetNumber = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
-				$scope.vsStreet       = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
-				$scope.vsCity         = !!$attrs.vsCity && place         ? vsGooglePlaceUtility.getCity(place)         : undefined;
-				$scope.vsPostCode     = !!$attrs.vsPostCode && place ? vsGooglePlaceUtility.getPostCode(place)         : undefined;
-                $scope.vsState        = !!$attrs.vsState && place        ? vsGooglePlaceUtility.getState(place)        : undefined;
-				$scope.vsCountryShort = !!$attrs.vsCountryShort && place ? vsGooglePlaceUtility.getCountryShort(place) : undefined;
-				$scope.vsCountry      = !!$attrs.vsCountry && place      ? vsGooglePlaceUtility.getCountry(place)      : undefined;
-				$scope.vsLatitude     = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
-    			$scope.vsLongitude    = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
+			    $scope.vsPlaceId       = !!$attrs.vsPlaceId  && place     ? vsGooglePlaceUtility.getPlaceId(place)      : undefined;
+				$scope.vsStreetNumber  = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
+				$scope.vsStreet        = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
+				$scope.vsCity          = !!$attrs.vsCity && place         ? vsGooglePlaceUtility.getCity(place)         : undefined;
+				$scope.vsPostCode      = !!$attrs.vsPostCode && place     ? vsGooglePlaceUtility.getPostCode(place)     : undefined;
+                $scope.vsState         = !!$attrs.vsState && place        ? vsGooglePlaceUtility.getState(place)        : undefined;
+				$scope.vsCountryShort  = !!$attrs.vsCountryShort && place ? vsGooglePlaceUtility.getCountryShort(place) : undefined;
+				$scope.vsCountry       = !!$attrs.vsCountry && place      ? vsGooglePlaceUtility.getCountry(place)      : undefined;
+				$scope.vsLatitude      = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
+    			$scope.vsLongitude     = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
+                $scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
 			};
 		}],
         link: function(scope, element, attrs, ctrls) {
