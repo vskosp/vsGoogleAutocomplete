@@ -130,6 +130,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 		require: ['vsGoogleAutocomplete', 'ngModel'],
 		scope: {
 			vsGoogleAutocomplete: '=',
+			vsFullAddress: '=',
 			vsPlace: '=?',
 			vsPlaceId: '=?',
 			vsStreetNumber: '=?',
@@ -151,6 +152,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			 * @param {google.maps.places.PlaceResult} place PlaceResult object
 			 */
 			this.updatePlaceComponents = function(place) {
+				$scope.vsFullAddress   = !!$attrs.vsFullAddress  && place ? place.formatted_address                     : undefined;
 				$scope.vsPlaceId       = !!$attrs.vsPlaceId  && place     ? vsGooglePlaceUtility.getPlaceId(place)      : undefined;
 				$scope.vsStreetNumber  = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
 				$scope.vsStreet        = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
