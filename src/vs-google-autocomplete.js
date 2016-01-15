@@ -130,6 +130,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 		require: ['vsGoogleAutocomplete', 'ngModel'],
 		scope: {
 			vsGoogleAutocomplete: '=',
+			vsFullAddress: '=',
 			vsPlace: '=?',
 			vsPlaceId: '=?',
 			vsStreetNumber: '=?',
@@ -141,7 +142,8 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			vsPostCode: '=?',
 			vsLatitude: '=?',
 			vsLongitude: '=?',
-			vsDistrict: '=?'
+			vsDistrict: '=?',
+			vsGeo: '=?'
 		},
 		controller: ['$scope', '$attrs', function($scope, $attrs) {
 			this.isolatedScope = $scope;
@@ -151,6 +153,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			 * @param {google.maps.places.PlaceResult} place PlaceResult object
 			 */
 			this.updatePlaceComponents = function(place) {
+				$scope.vsFullAddress   = !!$attrs.vsFullAddress  && place ? place.formatted_address                     : undefined;
 				$scope.vsPlaceId       = !!$attrs.vsPlaceId  && place     ? vsGooglePlaceUtility.getPlaceId(place)      : undefined;
 				$scope.vsStreetNumber  = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
 				$scope.vsStreet        = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
@@ -161,6 +164,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsCountry       = !!$attrs.vsCountry && place      ? vsGooglePlaceUtility.getCountry(place)      : undefined;
 				$scope.vsLatitude      = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
 				$scope.vsLongitude     = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
+				$scope.vsGeo	       = !!$attrs.vsGeo && place	  ? [$scope.vsLatitude, $scope.vsLongitude] 	: undefined;
 				$scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
 			};
 		}],
