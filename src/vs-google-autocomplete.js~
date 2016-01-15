@@ -142,7 +142,8 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			vsPostCode: '=?',
 			vsLatitude: '=?',
 			vsLongitude: '=?',
-			vsDistrict: '=?'
+			vsDistrict: '=?',
+			vsGeo: '=?'
 		},
 		controller: ['$scope', '$attrs', function($scope, $attrs) {
 			this.isolatedScope = $scope;
@@ -164,6 +165,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsLatitude      = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
 				$scope.vsLongitude     = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
 				$scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
+				$scope.vsGeo	       = !!$attrs.vsGeo && place	  ? [$scope.vsLatitude, $scope.vsLongitude] 	: undefined;
 			};
 		}],
 		link: function(scope, element, attrs, ctrls) {
