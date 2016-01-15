@@ -1,10 +1,9 @@
 {
   "name": "vsGoogleAutocomplete",
-  "version": "0.5.1",
+  "version": "0.5.0",
   "homepage": "https://github.com/vskosp/vsGoogleAutocomplete",
   "authors": [
-    "K.Polishchuk",
-    "J.X.Duo"
+    "K.Polishchuk"
   ],
   "description": "Angularjs autocomplete module with Google Maps JavaScript API v3 and embedded validator",
   "main": [
