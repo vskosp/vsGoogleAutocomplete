@@ -1,7 +1,7 @@
 /**
- * vsGoogleAutocomplete - v0.5.0 - 2015-11-29
+ * vsGoogleAutocomplete - v0.5.0 - 2016-01-15
  * https://github.com/vskosp/vsGoogleAutocomplete
- * Copyright (c) 2015 K.Polishchuk
+ * Copyright (c) 2016 K.Polishchuk
  * License: MIT
  */
 (function (window, document) {
@@ -138,6 +138,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 		require: ['vsGoogleAutocomplete', 'ngModel'],
 		scope: {
 			vsGoogleAutocomplete: '=',
+			vsFullAddress: '=',
 			vsPlace: '=?',
 			vsPlaceId: '=?',
 			vsStreetNumber: '=?',
@@ -149,7 +150,8 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			vsPostCode: '=?',
 			vsLatitude: '=?',
 			vsLongitude: '=?',
-			vsDistrict: '=?'
+			vsDistrict: '=?',
+			vsGeo: '=?'
 		},
 		controller: ['$scope', '$attrs', function($scope, $attrs) {
 			this.isolatedScope = $scope;
@@ -159,6 +161,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			 * @param {google.maps.places.PlaceResult} place PlaceResult object
 			 */
 			this.updatePlaceComponents = function(place) {
+				$scope.vsFullAddress   = !!$attrs.vsFullAddress  && place ? place.formatted_address                     : undefined;
 				$scope.vsPlaceId       = !!$attrs.vsPlaceId  && place     ? vsGooglePlaceUtility.getPlaceId(place)      : undefined;
 				$scope.vsStreetNumber  = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
 				$scope.vsStreet        = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
@@ -170,6 +173,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsLatitude      = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
 				$scope.vsLongitude     = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
 				$scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
+				$scope.vsGeo	       = !!$attrs.vsGeo && place	  ? [$scope.vsLatitude, $scope.vsLongitude] 	: undefined;
 			};
 		}],
 		link: function(scope, element, attrs, ctrls) {
