@@ -1,7 +1,7 @@
 /**
- * vsGoogleAutocomplete - v0.5.0 - 2016-01-15
+ * vsGoogleAutocomplete - v0.5.1 - 2016-01-15
  * https://github.com/vskosp/vsGoogleAutocomplete
- * Copyright (c) 2016 K.Polishchuk
+ * Copyright (c) 2016 K.Polishchuk, J.X.Duo
  * License: MIT
  */
 (function (window, document) {
@@ -172,8 +172,8 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsCountry       = !!$attrs.vsCountry && place      ? vsGooglePlaceUtility.getCountry(place)      : undefined;
 				$scope.vsLatitude      = !!$attrs.vsLatitude && place     ? vsGooglePlaceUtility.getLatitude(place)     : undefined;
 				$scope.vsLongitude     = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
-				$scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
 				$scope.vsGeo	       = !!$attrs.vsGeo && place	  ? [$scope.vsLatitude, $scope.vsLongitude] 	: undefined;
+				$scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
 			};
 		}],
 		link: function(scope, element, attrs, ctrls) {
