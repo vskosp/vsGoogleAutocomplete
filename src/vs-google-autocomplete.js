@@ -173,6 +173,15 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			var autocompleteOptions = scope.vsGoogleAutocomplete || {},
 				autocomplete = new google.maps.places.Autocomplete(element[0], autocompleteOptions);
 
+			/*
+			 ProVision.bg - Modification for dynamic set of vsGoogleAutocomplete Options
+			 @author: Venelin Iliev <venelin@provision.bg>
+			 */
+			scope.$watch('vsGoogleAutocomplete', function () {
+				autocomplete.setComponentRestrictions(scope.vsGoogleAutocomplete.componentRestrictions || {});
+				autocomplete.setTypes(scope.vsGoogleAutocomplete.types || {});
+			});
+
 			// google place object
 			var place;
 
