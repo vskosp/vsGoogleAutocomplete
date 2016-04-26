@@ -1,7 +1,7 @@
 /**
- * vsGoogleAutocomplete - v0.5.0 - 2015-11-29
+ * vsGoogleAutocomplete - v0.5.0 - 2016-04-26
  * https://github.com/vskosp/vsGoogleAutocomplete
- * Copyright (c) 2015 K.Polishchuk
+ * Copyright (c) 2016 K.Polishchuk
  * License: MIT
  */
 (function (window, document) {
@@ -180,6 +180,15 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			// google.maps.places.Autocomplete instance (support google.maps.places.AutocompleteOptions)
 			var autocompleteOptions = scope.vsGoogleAutocomplete || {},
 				autocomplete = new google.maps.places.Autocomplete(element[0], autocompleteOptions);
+
+			/*
+			 ProVision.bg - Modification for dynamic set of vsGoogleAutocomplete Options
+			 @author: Venelin Iliev <venelin@provision.bg>
+			 */
+			scope.$watch('vsGoogleAutocomplete', function () {
+				autocomplete.setComponentRestrictions(scope.vsGoogleAutocomplete.componentRestrictions || {});
+				autocomplete.setTypes(scope.vsGoogleAutocomplete.types || {});
+			});
 
 			// google place object
 			var place;
