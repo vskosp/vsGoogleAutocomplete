@@ -1,7 +1,7 @@
 /**
- * vsGoogleAutocomplete - v0.5.0 - 2015-11-29
+ * vsGoogleAutocomplete - v0.5.0 - 2016-08-15
  * https://github.com/vskosp/vsGoogleAutocomplete
- * Copyright (c) 2015 K.Polishchuk
+ * Copyright (c) 2016 K.Polishchuk
  * License: MIT
  */
 (function (window, document) {
@@ -152,6 +152,15 @@ angular.module('vsGoogleAutocomplete').directive('vsAutocompleteValidator', ['vs
 				return validator.valid;
 			};
 
+      // validate after blur
+			element.on('blur', function(event) {
+	      validator.validate(autocompleteCtrl.isolatedScope);
+	      if (!validator.valid) {
+		      autocompleteCtrl.updatePlaceComponents(undefined);
+	      }
+	      modelCtrl.$validate();
+      });
+
 			// watch for updating place
 			autocompleteCtrl.isolatedScope.$watch('vsPlace', function(place) {
 				// validate place
@@ -192,4 +201,5 @@ angular.module('vsGoogleAutocomplete').factory('vsStreetAddress', ['vsGooglePlac
 
 	return validate;
 }]);
+
 })(window, document);
