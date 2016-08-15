@@ -144,6 +144,15 @@ angular.module('vsGoogleAutocomplete').directive('vsAutocompleteValidator', ['vs
 				return validator.valid;
 			};
 
+      // validate after blur
+			element.on('blur', function(event) {
+	      validator.validate(autocompleteCtrl.isolatedScope);
+	      if (!validator.valid) {
+		      autocompleteCtrl.updatePlaceComponents(undefined);
+	      }
+	      modelCtrl.$validate();
+      });
+
 			// watch for updating place
 			autocompleteCtrl.isolatedScope.$watch('vsPlace', function(place) {
 				// validate place
