@@ -159,7 +159,7 @@ angular.module('vsGoogleAutocomplete').directive('vsAutocompleteValidator', ['vs
 			});
 
 			// publish autocomplete errors
-			modelCtrl.vsAutocompleteErorr = validator.error;
+			modelCtrl.vsAutocompleteError = validator.error;
 		}
 	};
 }]);
