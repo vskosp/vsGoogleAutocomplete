@@ -46,6 +46,12 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
 		return place.place_id;
 	}
 
+	function getSubPremise(place) {
+		var COMPONENT_TEMPLATE = { subpremise: 'short_name' },
+			subPremise = getAddrComponent(place, COMPONENT_TEMPLATE);
+		return subPremise;
+	}
+
 	function getStreetNumber(place) {
 		var COMPONENT_TEMPLATE = { street_number: 'short_name' },
 			streetNumber = getAddrComponent(place, COMPONENT_TEMPLATE);
@@ -111,6 +117,7 @@ angular.module('vsGoogleAutocomplete').factory('vsGooglePlaceUtility', function(
 		isGooglePlace: isGooglePlace,
 		isContainTypes: isContainTypes,
 		getPlaceId: getPlaceId,
+		getSubPremise: getSubPremise,
 		getStreetNumber: getStreetNumber,
 		getStreet: getStreet,
 		getCity: getCity,
@@ -132,6 +139,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			vsGoogleAutocomplete: '=',
 			vsPlace: '=?',
 			vsPlaceId: '=?',
+			vsSubPremise: '=?',
 			vsStreetNumber: '=?',
 			vsStreet: '=?',
 			vsCity: '=?',
@@ -152,6 +160,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 			 */
 			this.updatePlaceComponents = function(place) {
 				$scope.vsPlaceId       = !!$attrs.vsPlaceId  && place     ? vsGooglePlaceUtility.getPlaceId(place)      : undefined;
+				$scope.vsSubPremise    = !!$attrs.vsSubPremise && place   ? vsGooglePlaceUtility.getSubPremise(place)   : undefined;
 				$scope.vsStreetNumber  = !!$attrs.vsStreetNumber && place ? vsGooglePlaceUtility.getStreetNumber(place) : undefined;
 				$scope.vsStreet        = !!$attrs.vsStreet && place       ? vsGooglePlaceUtility.getStreet(place)       : undefined;
 				$scope.vsCity          = !!$attrs.vsCity && place         ? vsGooglePlaceUtility.getCity(place)         : undefined;
