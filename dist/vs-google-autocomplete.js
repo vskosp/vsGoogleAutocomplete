@@ -1,7 +1,7 @@
 /**
- * vsGoogleAutocomplete - v0.5.0 - 2015-11-29
+ * vsGoogleAutocomplete - v0.5.0 - 2018-10-01
  * https://github.com/vskosp/vsGoogleAutocomplete
- * Copyright (c) 2015 K.Polishchuk
+ * Copyright (c) 2018 K.Polishchuk
  * License: MIT
  */
 (function (window, document) {
@@ -171,6 +171,10 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsLongitude     = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
 				$scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
 			};
+      
+      this.invokeCallback = function () {
+        if($scope.vsUpdate) $scope.vsUpdate();
+      };
 		}],
 		link: function(scope, element, attrs, ctrls) {
 			// controllers
@@ -197,6 +201,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 					modelCtrl.$setViewValue(viewValue);
 					modelCtrl.$render();
 				});
+        autocompleteCtrl.invokeCallback();
 			});
 
 			// updates view value on focusout

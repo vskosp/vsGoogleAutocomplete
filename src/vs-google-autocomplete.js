@@ -163,6 +163,10 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 				$scope.vsLongitude     = !!$attrs.vsLongitude && place    ? vsGooglePlaceUtility.getLongitude(place)    : undefined;
 				$scope.vsDistrict      = !!$attrs.vsDistrict && place     ? vsGooglePlaceUtility.getDistrict(place)     : undefined;
 			};
+      
+      this.invokeCallback = function () {
+        if($scope.vsUpdate) $scope.vsUpdate();
+      };
 		}],
 		link: function(scope, element, attrs, ctrls) {
 			// controllers
@@ -189,6 +193,7 @@ angular.module('vsGoogleAutocomplete').directive('vsGoogleAutocomplete', ['vsGoo
 					modelCtrl.$setViewValue(viewValue);
 					modelCtrl.$render();
 				});
+        autocompleteCtrl.invokeCallback();
 			});
 
 			// updates view value on focusout
